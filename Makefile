@@ -6,13 +6,13 @@
 #    By: flolefeb <flolefeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/14 20:03:06 by flolefeb          #+#    #+#              #
-#    Updated: 2020/10/15 17:29:34 by flolefeb         ###   ########.fr        #
+#    Updated: 2020/10/18 22:28:56 by flolefeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	libasm.a
 
-SRCS		=	ft_strlen.s ft_read.s
+SRCS		=	ft_strlen.s ft_read.s ft_write.s
 
 OBJS		=	$(SRCS:.s=.o)
 

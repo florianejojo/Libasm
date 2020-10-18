@@ -6,7 +6,7 @@
 /*   By: flolefeb <flolefeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 19:52:16 by flolefeb          #+#    #+#             */
-/*   Updated: 2020/10/16 23:15:44 by flolefeb         ###   ########.fr       */
+/*   Updated: 2020/10/18 23:28:07 by flolefeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,24 @@
 # define test_4 "j'ai perdu ma pelotte de laine"
 
 # define STRLEN(x)			printf("Input = '%s' | ft_strlen = %d | strlen = %d\n", x, ft_strlen(x), (int)strlen(x));
-# define WRITE(str, x)		printf("Input = '%s' | ft_write = '%s' | write = '%s'\n", str, ft_write(1,str,x), write (1,str,x);
+# define WRITE(str, x)		printf("\n ft_write = \n"); \
+							ft_write(0,str,x); \
+							printf("\n write = \n"); \
+							write(0,str,x); printf("\n");
 
 int		ft_strlen(char const *str);
 ssize_t	ft_read(int fd, void *buf, int nbyte);
 ssize_t	ft_write(int fd, void const *buf, size_t nbyte);
+
+void	test_write(char *str, int x)
+{
+	printf("ft_write avec x = %d\n", x);
+	ft_write(0 ,str ,x);
+	printf("\n");
+	printf("write avec x = %d\n", x);
+	write(0, str, x);
+	printf("\n");
+}
 
 void	test_read(char *buffer, int x)
 {
@@ -41,7 +54,7 @@ void	test_read(char *buffer, int x)
 	printf ("buffer = '%s' | ft_ret = %d\n", buffer, ret_ft);
 	close (fd);
 
-	printf("\n--close fd puis open fd again--\n\n");
+	printf("\n--close fd and open fd again--\n\n");
 
 	ret = read((fd = open("test.txt", O_RDONLY)), buffer, x);
 	buffer[ret] = 0;
@@ -58,23 +71,31 @@ int		main(void)
 	while (i < 100)
 		buffer[i++] = 0;
 
-	printf("-> ft_strlen.s\n");	
+	printf("\n================================\n");
+	printf("========== FT_STRLEN =============\n");
+	printf("================================\n\n");
 	STRLEN(test_1);
 	STRLEN(test_2);
 	STRLEN(test_3);
 	STRLEN(test_4);
 	printf("\n\n");
 
-	printf("-> ft_read.s\n");	
+	printf("\n================================\n");
+	printf("========== FT_READ =============\n");
+	printf("================================\n\n");	
 	test_read(buffer, 1);
 	test_read(buffer, 5);
 	test_read(buffer, 10);
 	test_read(buffer, 50);
 
-	WRITE(test_1, 1);
-	WRITE(test_2, 5);
-	WRITE(test_3, 10);
-	WRITE(test_4, 50);
+	printf("\n================================\n");
+	printf("========== FT_WRITE =============\n");
+	printf("================================\n\n");	
+
+	test_write(test_1, ft_strlen(test_1));
+	test_write(test_2, ft_strlen(test_2) -2);
+	test_write(test_3, ft_strlen(test_3) );
+	test_write(test_4, ft_strlen(test_4));
 	printf("\n\n");
 
 
