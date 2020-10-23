@@ -18,14 +18,14 @@ void	test_write(char *str, int x, int fd)
 	int ft_ret;
 
 	printf("nb de char a ecrire = %d\n", x);
-	errno = 0;
+	//errno = 0;
 	ft_ret = ft_write(fd ,str ,x);
 	printf("\n");
 	printf ("ft_ret = %d | errno : %d \n", ft_ret, errno);
 
 	
 	ret = 0;
-	errno = 0;
+	//errno = 0;
 	
 	ret = write(fd, str, x);
 	printf("\n");

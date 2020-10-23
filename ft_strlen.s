@@ -1,9 +1,9 @@
 
 
-                global	_ft_strlen
+                global	ft_strlen
                 segment	.text
 
-_ft_strlen:
+ft_strlen:
                 mov     rax, 0                  ;       
 
 loop:           cmp     Byte[rdi + rax], 0      ; rdi pointe vers le début de la chaine, on ajoute rax pour comparer le char en question avec 0

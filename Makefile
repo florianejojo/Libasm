@@ -18,10 +18,10 @@ HEADER		=	libasm.h
 
 OBJS		=	$(SRCS:.s=.o)
 
-NA			=	nasm -f macho64
+NA			=	nasm -f elf64
 
-%.o:%.s
-				$(NA) $(NA_FLAGS) $<
+$(OBJS): %.o:%.s
+				$(NA) -s $< -o $@
 
 all:			$(NAME)
 

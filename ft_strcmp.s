@@ -1,10 +1,10 @@
 			
-	global	_ft_strcmp
+	global	ft_strcmp
 
     segment .text
 
 
-_ft_strcmp:
+ft_strcmp:
 
                 cmp		byte[rdi], 0	
 	            je		return			
@@ -15,7 +15,7 @@ _ft_strcmp:
                 jnz     return
                 inc     rdi
                 inc     rsi
-                loop    _ft_strcmp
+                loop    ft_strcmp
 
 return:
                 movzx   rax, byte [rdi]
