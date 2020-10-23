@@ -6,7 +6,7 @@
 /*   By: flolefeb <flolefeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 19:52:16 by flolefeb          #+#    #+#             */
-/*   Updated: 2020/10/19 22:21:21 by flolefeb         ###   ########.fr       */
+/*   Updated: 2020/10/23 11:09:12 by flolefeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,12 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <string.h>
+#include <unistd.h>
 
+
+#define errno (*__error())
+#define O_RDONLY 0x0000
 
 # define test_1 ""
 # define test_2 "hey"
@@ -26,14 +31,15 @@
 # define test_4 "j'ai perdu ma pelotte de laine"
 
 # define STRLEN(x)			printf("Input = '%s' | ft_strlen = %d | strlen = %d\n", x, ft_strlen(x), (int)strlen(x));
-// # define WRITE(str, x)		printf("\n ft_write = \n"); \
-// 							ft_write(0,str,x); \
-// 							printf("\n write = \n"); \
-// 							write(0,str,x); printf("\n");
+# define STRCPY(buffer,str) printf("Input = '%s' | ft_dest = '%s' | dest = '%s'\n", str, ft_strcpy(buffer, str), strcpy(buffer, str));
+
 
 int		ft_strlen(char const *str);
 ssize_t	ft_read(int fd, void *buf, int nbyte);
 ssize_t	ft_write(int fd, void const *buf, size_t nbyte);
+char	*ft_strdup(const char *s);
+char	*ft_strcpy(char *dst, char const *src);
+
 
 void	test_write(char *str, int x, int fd)
 {
@@ -78,9 +84,23 @@ void	test_read(char *buffer, int x, char *file)
 	printf ("----------------------------\n");
 }
 
+void	test_strdup(char *src)
+{
+	char *ft_dst;
+	char *dst;
+
+	printf("src = '%s'\n", src);
+	
+	dst = strdup(src);
+
+	ft_dst = ft_strdup(src);
+	printf ("ft_dst = '%s'| dst = '%s'\n", ft_dst, dst);
+	printf ("----------------------------\n");
+}
+
 int		main(void)
 {
-	int i;
+	int i = 0;
 	char	buffer[100];
 
 
@@ -97,7 +117,7 @@ int		main(void)
 	printf("\n\n");
 
 	printf("\n================================\n");
-	printf("========== FT_READ =============\n");
+	printf("========== FT_READ ===============\n");
 	printf("================================\n\n");	
 	test_read(buffer, -1, "");
 	test_read(buffer, 5, "test.txt");
@@ -105,15 +125,33 @@ int		main(void)
 	test_read(buffer, 50, "test.txt");
 
 	printf("\n================================\n");
-	printf("========== FT_WRITE =============\n");
+	printf("========== FT_WRITE ==============\n");
 	printf("================================\n\n");	
 
 	test_write(test_1, ft_strlen(test_1), 50);
 	test_write(test_2, -ft_strlen(test_2), 1);
 	test_write(test_3, ft_strlen(test_3), 1);
 	test_write(test_4, ft_strlen(test_4), 1);
-	printf("\n\n");
 
-	
+	printf("\n================================\n");
+	printf("========== FT_STRCPY =============\n");
+	printf("================================\n\n");	
+
+	STRCPY(buffer, test_1);
+	STRCPY(buffer, test_2);
+	STRCPY(buffer, test_3);
+	STRCPY(buffer, test_4);
+
+	printf("\n================================\n");
+	printf("========== FT_STRDUP =============\n");
+	printf("================================\n\n");	
+
+	test_strdup(test_1);
+	test_strdup(test_2);
+	test_strdup(test_3);
+	test_strdup(test_4);
+
+
+
 	return (0);
 }
