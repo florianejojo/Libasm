@@ -4,21 +4,18 @@
     segment .text
     
 _ft_strcpy:
-    push 	rdi			        ; 
+    push 	rdi			        ; on push rdi en haut de la pile
 	mov 	rdi, rsi	        ; pour que ce soit rsi envoyé dans strlen (car c'est rdi)
 	call 	_ft_strlen 	        ; ret dans rax
-    ;mov     rcx, rax            ;
-	mov 	rsi, rdi            ; on remet tout en place
-	pop 	rdi	                ; on récup rdi
-    mov		r8, 0				; 
-	mov		[rdi + rax], r8		; rdi[rax] = 0
+	pop 	rdi	                ; on récup ce qu'il y a en haut de la pile dans rdi
+    mov     Byte[rdi + rax], 0  ;
     
 copy:
     dec     rax
     cmp     rax, 0
     jl      return              ;
-	mov		r8, [rsi + rax]		;
-	mov 	[rdi + rax], r8		; 
+	mov	r8, [rsi + rax]		    ; equivalent a  push    qword[rsi + rax]
+	mov 	[rdi + rax], r8		;               pop     qword[rdi + rax]
     loop    copy                ;
 
 return:

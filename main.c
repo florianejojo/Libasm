@@ -6,40 +6,11 @@
 /*   By: flolefeb <flolefeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 19:52:16 by flolefeb          #+#    #+#             */
-/*   Updated: 2020/10/23 11:09:12 by flolefeb         ###   ########.fr       */
+/*   Updated: 2020/10/23 15:48:40 by flolefeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <string.h>
-#include <unistd.h>
-
-
-#define errno (*__error())
-#define O_RDONLY 0x0000
-
-# define test_1 ""
-# define test_2 "hey"
-# define test_3 "mamie"
-# define test_4 "j'ai perdu ma pelotte de laine"
-
-# define STRLEN(x)			printf("Input = '%s' | ft_strlen = %d | strlen = %d\n", x, ft_strlen(x), (int)strlen(x));
-# define STRCPY(buffer,str) printf("Input = '%s' | ft_dest = '%s' | dest = '%s'\n", str, ft_strcpy(buffer, str), strcpy(buffer, str));
-
-
-int		ft_strlen(char const *str);
-ssize_t	ft_read(int fd, void *buf, int nbyte);
-ssize_t	ft_write(int fd, void const *buf, size_t nbyte);
-char	*ft_strdup(const char *s);
-char	*ft_strcpy(char *dst, char const *src);
-
+#include "libasm.h"
 
 void	test_write(char *str, int x, int fd)
 {
@@ -100,9 +71,8 @@ void	test_strdup(char *src)
 
 int		main(void)
 {
-	int i = 0;
+	int		i = 0;
 	char	buffer[100];
-
 
 	while (i < 100)
 		buffer[i++] = 0;
@@ -151,6 +121,19 @@ int		main(void)
 	test_strdup(test_3);
 	test_strdup(test_4);
 
+	printf("\n================================\n");
+	printf("========== FT_STRCMP =============\n");
+	printf("================================\n\n");
+
+	char *s1 = test_1;
+	char *s2 = test_2;
+	char *s3 = test_3;
+	char *s4 = test_4;
+
+	STRCMP(s1, s2);
+	STRCMP(s2, s3);
+	STRCMP(s3, s4);
+	STRCMP(s4, s2);
 
 
 	return (0);

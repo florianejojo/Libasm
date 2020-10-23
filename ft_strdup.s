@@ -14,6 +14,6 @@ _ft_strdup:
 	call	_malloc			; On envoie rdi = rax dans malloc | len + 1
 	pop		rsi				; On récupère ce qu'on a push dans la stack dans rsi | rsi = chaine à duppliquer
 	mov		rdi, rax		; rdi = rax = chaine malloquée 
-	call	_ft_strcpy		; call ft_strcpy (rdi, rsi), ret is stock in rax donc la chaine duppliquée
-	ret						; return rax so the new string
+	call	_ft_strcpy		; ft_strcpy (rdi, rsi) | chaine duppliquée = rax
+	ret						;
 
