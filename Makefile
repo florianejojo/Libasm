@@ -20,7 +20,7 @@ OBJS		=	$(SRCS:.s=.o)
 
 NA			=	nasm -f elf64
 
-$(OBJS): %.o:%.s
+%.o:		%.s
 				$(NA) -s $< -o $@
 
 all:			$(NAME)

@@ -12,24 +12,28 @@
 
 #include "libasm.h"
 
-void	test_write(char *str, int x, int fd)
+void	test_write(char *str, int x, int fd, int fct_nb)
 {
 	int ret;
 	int ft_ret;
 
-	printf("nb de char a ecrire = %d\n", x);
-	//errno = 0;
-	ft_ret = ft_write(fd ,str ,x);
-	printf("\n");
-	printf ("ft_ret = %d | errno : %d \n", ft_ret, errno);
+printf(" --> errno before = %d \n", errno);
+printf("nb de char a ecrire = %d\n", x);
 
+	if (fct_nb == 0)
+	{
 	
-	ret = 0;
-	//errno = 0;
+		ft_ret = ft_write(fd ,str ,x);
+		printf ("\nft_write_ret = %d  \n", ft_ret);
+
+	}
 	
-	ret = write(fd, str, x);
-	printf("\n");
-	printf ("ret = %d | errno : %d \n", ret, errno);
+	else
+	{
+		ret = write(fd, str, x);
+		printf ("\nwrite_ret = %d  \n", ret);
+	}
+	printf(" --> errno after = %d \n", errno);
 	printf ("----------------------------\n");
 }
 
@@ -98,10 +102,25 @@ int		main(void)
 	printf("========== FT_WRITE ==============\n");
 	printf("================================\n\n");	
 
-	test_write(test_1, ft_strlen(test_1), 50);
-	test_write(test_2, -ft_strlen(test_2), 1);
-	test_write(test_3, ft_strlen(test_3), 1);
-	test_write(test_4, ft_strlen(test_4), 1);
+	printf("-wrong fd-\n");
+	test_write(test_1, ft_strlen(test_1), 50, 0);
+	errno = 0;
+	test_write(test_1, ft_strlen(test_1), 50, 1);
+	errno = 0;
+	printf("-wrong nb of char-\n");
+	test_write(test_2, -ft_strlen(test_2), 1, 0);
+	errno = 0;
+	test_write(test_2, -ft_strlen(test_2), 1, 1);
+	errno = 0;
+	printf("write = %zd & errno = %d\n", write(-1, "C'est pas un fd correct\n", 14), errno);
+	errno = 0;
+    printf("ft_write = %zd & errno = %d\n\n", ft_write(-1, "C'est pas un fd correct\n", 14), errno);
+	//test_write(test_3, ft_strlen(test_3), 1, 0);
+	errno = 0;
+	//test_write(test_3, ft_strlen(test_3), 1, 1);
+
+	//test_write(test_4, ft_strlen(test_4), 1, 0);
+	//test_write(test_4, ft_strlen(test_4), 1, 1);
 
 	printf("\n================================\n");
 	printf("========== FT_STRCPY =============\n");
